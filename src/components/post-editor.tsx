@@ -156,7 +156,7 @@ export function PostEditor({ postId, initial }: PostEditorProps) {
 
       <div className="space-y-2 lg:sticky lg:top-20 lg:self-start">
         <Label>预览</Label>
-        <div className="bg-background min-h-[28rem] rounded-xl border p-5">
+        <div className="bg-card/70 border-border/70 min-h-[28rem] rounded-2xl border p-5 shadow-sm">
           {content.trim() ? (
             <Markdown content={content} />
           ) : (

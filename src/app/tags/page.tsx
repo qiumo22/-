@@ -41,7 +41,7 @@ export default async function TagsPage() {
             <Link
               key={tag.id}
               href={`/tags/${tag.slug}`}
-              className="bg-muted hover:bg-accent rounded-full px-3 py-1.5 text-sm transition-colors"
+              className="bg-secondary text-secondary-foreground hover:bg-primary/10 hover:text-primary rounded-full px-3 py-1.5 text-sm transition-colors"
             >
               #{tag.name}
             </Link>

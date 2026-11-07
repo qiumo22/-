@@ -128,7 +128,7 @@ export default async function PostPage({
               <Link
                 key={tag.id}
                 href={`/tags/${tag.slug}`}
-                className="bg-muted text-muted-foreground hover:text-foreground rounded-full px-2.5 py-0.5 text-xs"
+                className="bg-secondary text-secondary-foreground hover:bg-primary/10 hover:text-primary rounded-full px-2.5 py-0.5 text-xs transition-colors"
               >
                 #{tag.name}
               </Link>

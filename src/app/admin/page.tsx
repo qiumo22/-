@@ -57,7 +57,10 @@ export default async function AdminPage({
               .filter((name): name is string => Boolean(name));
 
             return (
-              <li key={post.id} className="space-y-4 rounded-xl border p-5">
+              <li
+                key={post.id}
+                className="bg-card/80 border-border/70 space-y-4 rounded-2xl border p-5 shadow-sm"
+              >
                 <div className="space-y-1">
                   <h2 className="text-lg font-semibold tracking-tight">
                     {post.title}

@@ -56,6 +56,7 @@ export default async function SearchPage({
           defaultValue={raw}
           placeholder="输入关键词"
           aria-label="搜索文章"
+          className="bg-background/80 border-border/70 rounded-full"
         />
         <button
           type="submit"

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Flower2 } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
@@ -17,9 +18,15 @@ export async function SiteHeader() {
   const { profile } = await getCurrentProfile();
 
   return (
-    <header className="bg-background/85 sticky top-0 z-40 border-b backdrop-blur">
-      <div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-6 px-4">
-        <Link href="/" className="text-base font-semibold tracking-tight">
+    <header className="border-border/60 bg-background/75 sticky top-0 z-40 border-b backdrop-blur-md">
+      <div className="mx-auto flex h-16 w-full max-w-5xl items-center gap-5 px-4">
+        <Link
+          href="/"
+          className="group font-heading flex items-center gap-2 text-lg font-semibold tracking-tight"
+        >
+          <span className="bg-secondary text-primary ring-petal/25 flex size-8 items-center justify-center rounded-full ring-1 transition-transform group-hover:rotate-12">
+            <Flower2 className="size-4" />
+          </span>
           校园写作
         </Link>
 
@@ -28,7 +35,7 @@ export async function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-md px-2.5 py-1.5 transition-colors"
+              className="text-muted-foreground hover:bg-secondary hover:text-secondary-foreground rounded-full px-3 py-1.5 transition-colors"
             >
               {item.label}
             </Link>
@@ -36,7 +43,7 @@ export async function SiteHeader() {
           {profile ? (
             <Link
               href="/dashboard"
-              className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-md px-2.5 py-1.5 transition-colors"
+              className="text-muted-foreground hover:bg-secondary hover:text-secondary-foreground rounded-full px-3 py-1.5 transition-colors"
             >
               我的文章
             </Link>
@@ -57,7 +64,7 @@ export async function SiteHeader() {
 
               <Link
                 href="/profile"
-                className="hover:bg-muted flex items-center gap-2 rounded-md px-1.5 py-1.5 text-sm"
+                className="hover:bg-secondary flex items-center gap-2 rounded-full px-1.5 py-1.5 text-sm transition-colors"
               >
                 {profile.avatar_url ? (
                   <Image
@@ -65,10 +72,10 @@ export async function SiteHeader() {
                     alt=""
                     width={28}
                     height={28}
-                    className="size-7 rounded-full object-cover"
+                    className="ring-petal/30 size-7 rounded-full object-cover ring-2"
                   />
                 ) : (
-                  <span className="bg-muted text-muted-foreground flex size-7 items-center justify-center rounded-full text-xs font-medium">
+                  <span className="bg-secondary text-secondary-foreground ring-petal/30 flex size-7 items-center justify-center rounded-full text-xs font-medium ring-2">
                     {profile.display_name.slice(0, 1)}
                   </span>
                 )}

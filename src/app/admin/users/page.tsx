@@ -50,7 +50,7 @@ export default async function AdminUsersPage({
         {users.map((profile) => (
           <li
             key={profile.id}
-            className="flex flex-wrap items-start justify-between gap-4 rounded-xl border p-5"
+            className="bg-card/80 border-border/70 flex flex-wrap items-start justify-between gap-4 rounded-2xl border p-5 shadow-sm"
           >
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">

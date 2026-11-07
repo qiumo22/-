@@ -53,7 +53,10 @@ export default async function AdminPostsPage({
               .filter((name): name is string => Boolean(name));
 
             return (
-              <li key={post.id} className="space-y-3 rounded-xl border p-5">
+              <li
+                key={post.id}
+                className="bg-card/80 border-border/70 space-y-3 rounded-2xl border p-5 shadow-sm"
+              >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="space-y-1">
                     <h2 className="text-lg font-semibold tracking-tight">

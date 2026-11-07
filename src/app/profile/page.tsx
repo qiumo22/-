@@ -21,7 +21,9 @@ export default async function ProfilePage() {
         </p>
       </div>
 
-      <ProfileForm profile={profile} />
+      <div className="bg-card/80 border-border/70 rounded-2xl border p-6 shadow-sm">
+        <ProfileForm profile={profile} />
+      </div>
 
       <p className="text-muted-foreground text-sm">
         公开主页：{" "}

@@ -43,7 +43,7 @@ export default async function AdminLogPage() {
           还没有管理操作记录。
         </div>
       ) : (
-        <ul className="divide-y rounded-xl border">
+        <ul className="bg-card/70 divide-y rounded-2xl border">
           {actions.map((action) => (
             <li key={action.id} className="space-y-1 p-4 text-sm">
               <div className="flex flex-wrap items-center gap-2">

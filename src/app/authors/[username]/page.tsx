@@ -75,10 +75,10 @@ export default async function AuthorPage({
             alt=""
             width={72}
             height={72}
-            className="size-18 rounded-full border object-cover"
+            className="ring-petal/30 size-18 rounded-full border object-cover ring-2"
           />
         ) : (
-          <div className="bg-muted text-muted-foreground flex size-18 items-center justify-center rounded-full text-2xl font-medium">
+          <div className="bg-secondary text-secondary-foreground ring-petal/30 flex size-18 items-center justify-center rounded-full text-2xl font-medium ring-2">
             {author.display_name.slice(0, 1)}
           </div>
         )}

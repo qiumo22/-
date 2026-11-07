@@ -94,7 +94,10 @@ export function Comments({
             const canDelete = isAdmin || comment.author_id === currentUserId;
 
             return (
-              <li key={comment.id} className="space-y-2 rounded-xl border p-4">
+              <li
+                key={comment.id}
+                className="bg-card/70 border-border/70 space-y-2 rounded-2xl border p-4"
+              >
                 <div className="flex flex-wrap items-center gap-2 text-sm">
                   {comment.author?.avatar_url ? (
                     <Image
