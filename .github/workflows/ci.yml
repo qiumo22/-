@@ -20,7 +20,15 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          set +e
+          npm ci > npm-ci.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            echo "::error::npm ci failed: $(tail -30 npm-ci.log | tr '\n' ' ' | cut -c1-1200)"
+            cat npm-ci.log
+          fi
+          exit $code
 
       - name: Lint
         run: npm run lint
