@@ -1,0 +1,13 @@
+.env.local
+.env*.local
+/.claude
+/openspec
+/tests
+/docs
+/scripts
+/supabase
+/.github
+/playwright.config.ts
+/test-results
+/playwright-report
+/blob-report

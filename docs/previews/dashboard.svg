@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="我的文章页预览">
+  <rect width="1200" height="800" fill="#fafafa"/>
+  <rect width="1200" height="64" fill="#ffffff"/>
+  <line x1="0" y1="64" x2="1200" y2="64" stroke="#e5e5e5"/>
+  <text x="80" y="40" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">校园写作</text>
+  <text x="220" y="39" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#525252">首页</text>
+  <text x="280" y="39" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">标签</text>
+  <text x="340" y="39" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">搜索</text>
+  <text x="400" y="39" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#525252">我的文章</text>
+  <rect x="900" y="16" width="80" height="32" rx="8" fill="#171717"/>
+  <text x="918" y="37" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#ffffff">写文章</text>
+  <circle cx="1020" cy="32" r="14" fill="#e5e5e5"/>
+  <text x="1042" y="37" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#171717">林夏</text>
+
+  <text x="80" y="136" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="28" font-weight="600" fill="#171717">我的文章</text>
+  <text x="80" y="164" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">草稿、待审与已发布文章都在这里。</text>
+
+  <rect x="80" y="196" width="1040" height="120" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+  <text x="108" y="234" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">为什么我重新开始写日记</text>
+  <rect x="360" y="216" width="64" height="24" rx="12" fill="#ecfdf5"/>
+  <text x="378" y="233" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#047857">已发布</text>
+  <text x="108" y="262" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#a3a3a3">更新于 2026年10月28日 · 随笔 / 校园</text>
+  <rect x="900" y="226" width="72" height="32" rx="8" fill="#ffffff" stroke="#d4d4d4"/>
+  <text x="924" y="247" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#171717">编辑</text>
+  <rect x="984" y="226" width="72" height="32" rx="8" fill="#f5f5f5"/>
+  <text x="1008" y="247" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">删除</text>
+
+  <rect x="80" y="336" width="1040" height="120" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+  <text x="108" y="374" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">期末周生存指南</text>
+  <rect x="288" y="356" width="64" height="24" rx="12" fill="#fffbeb"/>
+  <text x="302" y="373" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#b45309">待审核</text>
+  <text x="108" y="402" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#a3a3a3">更新于 2026年11月5日 · 经验 / 校园</text>
+  <text x="900" y="402" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#a3a3a3">审核中，暂不可编辑</text>
+
+  <rect x="80" y="476" width="1040" height="150" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+  <text x="108" y="514" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">夜跑手记</text>
+  <rect x="220" y="496" width="64" height="24" rx="12" fill="#fef2f2"/>
+  <text x="238" y="513" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#b91c1c">已驳回</text>
+  <text x="108" y="542" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#a3a3a3">更新于 2026年11月6日 · 散文 / 校园</text>
+  <text x="108" y="570" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#b91c1c">审核说明：内容需要补充更多个人体验后重新提交。</text>
+  <rect x="760" y="556" width="72" height="32" rx="8" fill="#ffffff" stroke="#d4d4d4"/>
+  <text x="784" y="577" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#171717">编辑</text>
+  <rect x="844" y="556" width="96" height="32" rx="8" fill="#171717"/>
+  <text x="862" y="577" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#ffffff">提交审核</text>
+  <rect x="952" y="556" width="72" height="32" rx="8" fill="#f5f5f5"/>
+  <text x="976" y="577" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">删除</text>
+
+  <rect x="80" y="646" width="1040" height="120" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+  <text x="108" y="684" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">旧文：考试周的时间管理</text>
+  <rect x="352" y="666" width="64" height="24" rx="12" fill="#fff7ed"/>
+  <text x="366" y="683" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#c2410c">已下架</text>
+  <text x="108" y="712" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#a3a3a3">更新于 2026年9月20日 · 经验 / 校园</text>
+  <text x="108" y="740" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#c2410c">审核说明：内容已过时，暂时下架。</text>
+</svg>

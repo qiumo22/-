@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="首页预览">
+  <rect width="1200" height="800" fill="#fafafa"/>
+  <rect width="1200" height="64" fill="#ffffff"/>
+  <line x1="0" y1="64" x2="1200" y2="64" stroke="#e5e5e5"/>
+  <text x="80" y="40" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">校园写作</text>
+  <text x="220" y="39" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#525252">首页</text>
+  <text x="280" y="39" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">标签</text>
+  <text x="340" y="39" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">搜索</text>
+  <rect x="940" y="16" width="60" height="32" rx="8" fill="#f5f5f5"/>
+  <text x="958" y="37" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#171717">登录</text>
+  <rect x="1012" y="16" width="60" height="32" rx="8" fill="#171717"/>
+  <text x="1030" y="37" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#ffffff">注册</text>
+
+  <rect x="80" y="104" width="1040" height="300" rx="20" fill="#f5f5f5" stroke="#e5e5e5"/>
+  <text x="120" y="152" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">校园写作 · 多作者写作平台</text>
+  <text x="120" y="204" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="600" fill="#171717">把校园里的故事写下来，让更多人读到。</text>
+  <text x="120" y="244" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="16" fill="#525252">注册成为作者，用 Markdown 写作；文章经管理员审核后发布，</text>
+  <text x="120" y="270" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="16" fill="#525252">读者可以在首页、标签页和作者主页发现它们。</text>
+  <rect x="120" y="310" width="112" height="40" rx="8" fill="#171717"/>
+  <text x="150" y="335" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#ffffff">开始写作</text>
+  <rect x="246" y="310" width="88" height="40" rx="8" fill="#ffffff" stroke="#d4d4d4"/>
+  <text x="278" y="335" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#171717">登录</text>
+  <rect x="120" y="366" width="420" height="36" rx="8" fill="#ffffff" stroke="#d4d4d4"/>
+  <text x="136" y="389" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#a3a3a3">搜索标题、摘要或正文</text>
+  <rect x="552" y="366" width="72" height="36" rx="8" fill="#ffffff" stroke="#d4d4d4"/>
+  <text x="572" y="389" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#171717">搜索</text>
+
+  <text x="80" y="460" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">最新文章</text>
+  <text x="80" y="484" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">共 2 篇已发布文章。</text>
+
+  <rect x="80" y="508" width="1040" height="118" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+  <text x="108" y="548" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">为什么我重新开始写日记</text>
+  <text x="108" y="576" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">停写了三年之后，我又把本子翻了出来。</text>
+  <text x="108" y="602" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#a3a3a3">林夏 · 2026年10月28日 · #随笔 #校园</text>
+  <rect x="1000" y="532" width="96" height="70" rx="10" fill="#e5e5e5"/>
+
+  <rect x="80" y="642" width="1040" height="118" rx="16" fill="#ffffff" stroke="#e5e5e5"/>
+  <text x="108" y="682" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#171717">图书馆四楼靠窗的位置</text>
+  <text x="108" y="710" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#737373">一个座位，一整个秋天。</text>
+  <text x="108" y="736" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#a3a3a3">陈默 · 2026年11月2日 · #散文 #校园</text>
+  <rect x="1000" y="666" width="96" height="70" rx="10" fill="#e5e5e5"/>
+</svg>
