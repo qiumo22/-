@@ -10,6 +10,7 @@
 - 管理员审核队列、通过 / 驳回（必须填写理由）、已发布文章下架
 - 用户管理：封禁 / 解封，封禁后无法登录且内容从公开页面隐藏
 - 公开阅读：首页文章流与分页、文章详情、作者主页、标签页、站内搜索
+- 内置评论：登录用户可在已发布文章下发表评论，作者或管理员可删除
 - 审核操作留痕，管理员可查看操作记录
 - 深色模式、空状态、加载态、错误边界与 404 页面
 
@@ -22,7 +23,7 @@
 | 数据与认证 | Supabase（Auth + Postgres + Storage）           |
 | 权限       | Postgres Row Level Security + 状态机触发器      |
 | Markdown   | react-markdown + remark-gfm + rehype-sanitize   |
-| 评论       | Waline（可选，独立部署）                        |
+| 评论       | 内置 Supabase 评论表 + RLS                      |
 | 部署       | Vercel 免费版                                   |
 | 测试       | Vitest + 集成验证脚本                           |
 
@@ -44,11 +45,9 @@ Next.js 15 (Vercel)
 Supabase
   +----------------------------------+
   | Auth        注册 / 登录 / 会话   |
-  | Postgres    业务数据 + RLS       |
+  | Postgres    业务数据 + RLS + 评论|
   | Storage     头像 / 封面          |
   +----------------------------------+
-
-Waline（可选）——独立部署的评论服务
 ```
 
 数据库设计、RLS 策略与状态机详见 [`docs/database.md`](docs/database.md)；审核流程详见 [`docs/moderation.md`](docs/moderation.md)。
@@ -112,7 +111,6 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Publishable key（等同于 anon key，公开）             |
 | `SUPABASE_SERVICE_ROLE_KEY`     | Secret key（等同于 service role，仅服务端使用）      |
 | `SUPABASE_ACCESS_TOKEN`         | Personal Access Token（`sbp_` 开头），仅迁移脚本使用 |
-| `NEXT_PUBLIC_WALINE_URL`        | Waline 服务地址；留空时文章页显示“评论功能尚未配置”  |
 
 ### 4. 建立数据库
 
@@ -173,7 +171,6 @@ npm run dev
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
-   - `NEXT_PUBLIC_WALINE_URL`（可选）
 3. Build Command 保持 `npm run build`。
 4. 部署后访问生产 URL，使用演示账号或注册新账号验证完整流程。
 
@@ -208,7 +205,7 @@ docs/                     数据库、审核文档与页面预览
 
 ## 已知限制
 
-- 评论依赖单独部署的 Waline，未配置时只显示提示，不影响正文阅读。
+- 评论为纯文本，暂无敏感词过滤；依靠“登录后才能评论 + 作者/管理员删除”控制。
 - 已发布文章允许作者直接编辑，改动即时生效，不会重新送审；管理员仍可下架。
 - 站内搜索使用 `ILIKE` + `pg_trgm`，适合小规模数据；数据量增长后可替换为专用搜索引擎。
 - 面向练手与作品集，不包含实名、复杂风控与运营级审核能力。

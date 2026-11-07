@@ -9,6 +9,7 @@
 | `20261107092803_init_schema.sql`  | 枚举、业务表、更新时间触发器、注册时自动创建资料           |
 | `20261107093812_indexes.sql`      | 用户名 / 标签唯一索引，列表索引，中文搜索 trigram 索引     |
 | `20261107093818_rls_policies.sql` | 权限辅助函数、RLS 策略、状态机与字段保护触发器、Storage 桶 |
+| `20261107110500_comments.sql`     | 内置评论表、索引与评论 RLS                                 |
 
 ### 执行方式
 
@@ -56,6 +57,10 @@ npm run db:push
 ### `tags` / `post_tags`
 
 标签与文章多对多关联。标签名大小写不敏感唯一。
+
+### `comments`
+
+内置评论：`post_id`、`author_id`、`content`（纯文本，1–1000 字）、`created_at`。评论随文章或作者删除级联删除。只有登录且状态正常的用户可以在已发布文章下发表评论；作者和管理员可以删除评论。
 
 ### `moderation_actions`
 
@@ -106,6 +111,7 @@ npm run db:push
 | `posts`              | 读 `published`   | 读写自己的文章、删除非待审文章 | 读写删全部               |
 | `tags`               | 读               | 新建                           | 改、删                   |
 | `post_tags`          | 随文章可读       | 给自己的文章加删标签           | 全部                     |
+| `comments`           | 随文章可读       | 在已发布文章下评论、删自己的   | 删除任意评论             |
 | `moderation_actions` | 不可读           | 不可读写                       | 读、写                   |
 
 被封禁用户不能登录；其已发布文章通过 `is_active_author()` 从公开页面隐藏。
@@ -121,6 +127,9 @@ npm run db:query -- "select tablename, policyname from pg_policies where scheman
 
 # 匿名 / 作者 / 管理员的可见性与越权测试
 npm run verify:rls
+
+# 评论读写与删除权限
+npm run verify:comments
 ```
 
 `verify-rls.mjs` 会以匿名、作者两种身份实际请求数据接口，验证：

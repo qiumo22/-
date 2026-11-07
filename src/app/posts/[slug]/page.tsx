@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Comments } from "@/components/comments";
+import { Comments, type CommentItem } from "@/components/comments";
 import { Markdown } from "@/components/markdown";
+import { getCurrentProfile } from "@/lib/auth/guards";
+import { canAccessAdmin } from "@/lib/auth/permissions";
 import { formatDate } from "@/lib/format";
 import {
   PUBLIC_POST_SELECT,
@@ -15,6 +17,25 @@ import { createClient } from "@/lib/supabase/server";
 
 type PostDetailRow = RawPublicPost & {
   content_md: string;
+};
+
+type CommentRow = {
+  id: string;
+  content: string;
+  created_at: string;
+  author_id: string;
+  profiles:
+    | {
+        username: string;
+        display_name: string;
+        avatar_url: string | null;
+      }
+    | {
+        username: string;
+        display_name: string;
+        avatar_url: string | null;
+      }[]
+    | null;
 };
 
 async function getPost(slug: string) {
@@ -49,10 +70,13 @@ export async function generateMetadata({
 
 export default async function PostPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ commentError?: string }>;
 }) {
   const { slug } = await params;
+  const { commentError } = await searchParams;
   const row = await getPost(slug);
 
   if (!row) {
@@ -60,6 +84,30 @@ export default async function PostPage({
   }
 
   const post = toPublicPost(row);
+  const { profile } = await getCurrentProfile();
+  const supabase = await createClient();
+  const { data: commentRows } = await supabase
+    .from("comments")
+    .select(
+      "id,content,created_at,author_id,profiles!comments_author_id_fkey(username,display_name,avatar_url)",
+    )
+    .eq("post_id", post.id)
+    .order("created_at", { ascending: true });
+
+  const comments: CommentItem[] = (
+    (commentRows ?? []) as unknown as CommentRow[]
+  ).map((comment) => ({
+    id: comment.id,
+    content: comment.content,
+    created_at: comment.created_at,
+    author_id: comment.author_id,
+    author: Array.isArray(comment.profiles)
+      ? (comment.profiles[0] ?? null)
+      : comment.profiles,
+  }));
+
+  const currentUserId = profile?.status === "active" ? profile.id : null;
+  const isAdmin = canAccessAdmin(profile);
 
   return (
     <article className="mx-auto max-w-3xl space-y-7">
@@ -127,10 +175,14 @@ export default async function PostPage({
 
       <Markdown content={row.content_md} />
 
-      <section className="space-y-4 border-t pt-8">
-        <h2 className="text-lg font-semibold tracking-tight">评论</h2>
-        <Comments path={`/posts/${post.slug}`} />
-      </section>
+      <Comments
+        postId={post.id}
+        postSlug={post.slug}
+        comments={comments}
+        currentUserId={currentUserId}
+        isAdmin={isAdmin}
+        error={commentError}
+      />
     </article>
   );
 }

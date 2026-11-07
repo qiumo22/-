@@ -194,6 +194,25 @@ async function ensureUser(user) {
   return authUser;
 }
 
+async function ensureComment(postId, authorId, content) {
+  const { data, error } = await supabase
+    .from("comments")
+    .select("id")
+    .eq("post_id", postId)
+    .eq("author_id", authorId)
+    .eq("content", content)
+    .limit(1);
+
+  if (error) throw error;
+  if (data.length > 0) return;
+
+  const { error: insertError } = await supabase
+    .from("comments")
+    .insert({ post_id: postId, author_id: authorId, content });
+
+  if (insertError) throw insertError;
+}
+
 async function ensureModerationAction(actorId, postId, action, reason) {
   const { data, error } = await supabase
     .from("moderation_actions")
@@ -307,6 +326,17 @@ async function main() {
       );
     }
   }
+
+  await ensureComment(
+    postIds["why-i-started-journaling-again"],
+    userIds.chen_mo,
+    "看完也想把本子翻出来了。",
+  );
+  await ensureComment(
+    postIds["the-window-seat-on-the-fourth-floor"],
+    userIds.lin_xia,
+    "四楼的光真的很好。",
+  );
 
   console.log("\nSeed complete. Demo accounts:");
   for (const user of demoUsers) {

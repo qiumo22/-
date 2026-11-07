@@ -19,13 +19,13 @@
     "verify:rls": "node scripts/verify-rls.mjs",
     "verify:auth": "node scripts/verify-auth.mjs",
     "verify:posts": "node scripts/verify-posts.mjs",
-    "verify:public": "node scripts/verify-public.mjs"
+    "verify:public": "node scripts/verify-public.mjs",
+    "verify:comments": "node scripts/verify-comments.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.119.0",
-    "@waline/client": "^3.16.2",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",
     "lucide-react": "^1.70.0",

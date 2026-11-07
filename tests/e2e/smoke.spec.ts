@@ -105,7 +105,9 @@ test("register → write → review → read", async ({ page }) => {
   await expect(page.getByText("待审核").first()).toBeVisible();
 
   await page.getByRole("button", { name: "退出" }).click();
-  await expect(page.getByRole("link", { name: "登录" })).toBeVisible();
+  await expect(
+    page.getByRole("banner").getByRole("link", { name: "登录" }),
+  ).toBeVisible();
 
   await page.goto("/login");
   await page.getByLabel("邮箱").fill("admin@example.com");
@@ -133,13 +135,9 @@ test("register → write → review → read", async ({ page }) => {
   await expect(prose).toContainText("这是 E2E");
   await expect(prose.locator("strong")).toContainText("测试");
 
-  await expect(page.getByRole("heading", { name: "评论" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /评论/ })).toBeVisible();
 
-  if (env.NEXT_PUBLIC_WALINE_URL) {
-    await expect(page.locator(".wl-comment")).toBeAttached({
-      timeout: 15_000,
-    });
-  } else {
-    await expect(page.getByText("评论功能尚未配置。")).toBeVisible();
-  }
+  await page.getByLabel("评论").fill("这是 E2E 评论。");
+  await page.getByRole("button", { name: "发表评论" }).click();
+  await expect(page.getByText("这是 E2E 评论。")).toBeVisible();
 });

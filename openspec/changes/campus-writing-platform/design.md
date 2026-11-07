@@ -95,13 +95,13 @@ v1 使用 `ILIKE '%关键词%'` 匹配标题、摘要与正文，并启用 `pg_t
 
 升级路径：数据量变大后换 Meilisearch / Typesense，或安装 `zhparser` 做中文分词。搜索行为契约不变，替换实现不影响规格。
 
-### D7: 评论：Waline 独立部署
+### D7: 内置评论（Supabase）
 
-Waline 部署在 Vercel，与主应用分离，使用同一 Supabase Postgres 的独立 schema（通过连接池连接），也可以换用 Waline 支持的其他数据库。主应用仅在 `published` 文章的详情页嵌入组件，评论审核与反垃圾由 Waline 自身负责。
+评论与文章、用户一样存放在 Supabase Postgres。任何访客可读取已发布文章的评论；只有已登录且状态正常的用户可以在已发布文章下发表评论。作者可删除自己的评论，管理员可删除任意评论。评论正文按纯文本渲染，长度限制 1000 字。
 
-- 备选：Giscus —— 零后端，但要求 GitHub 登录，对校园用户门槛偏高。
-- 备选：自研评论 —— 超出 v1 范围。
-- 风险：Serverless 连接数限制；若连接不稳定，退回 Waline 的 LeanCloud 存储或暂时关闭评论。
+- 备选：Waline 独立部署 —— 需要额外服务与数据库连接，免费方案下运维成本高。
+- 备选：Giscus —— 需要 GitHub 登录，对校园用户门槛偏高。
+- 风险：没有敏感词过滤；通过“登录后才能评论 + 管理员删除”控制，后续可接入过滤词表。
 
 ### D8: 数据模型
 
@@ -111,6 +111,7 @@ auth.users (Supabase)
     v
 profiles --< posts --< post_tags >-- tags
     |            |
+    |            +--< comments
     |            +--< moderation_actions (target posts)
     +--< moderation_actions (target users)
 ```
@@ -120,6 +121,7 @@ profiles --< posts --< post_tags >-- tags
 - `profiles`：`id`（关联 `auth.users`）、`username`（唯一）、`display_name`、`bio`、`avatar_url`、`role`（reader / author / admin，默认 author）、`status`（active / banned）、时间戳。
 - `posts`：`id`、`author_id`、`title`、`slug`（唯一）、`summary`、`content_md`、`cover_url`、`status`、`published_at`、`submitted_at`、`moderation_reason`（最近一次理由）、时间戳。
 - `tags` / `post_tags`：标签与多对多关联。
+- `comments`：`post_id`、`author_id`、`content`（纯文本）、`created_at`；随文章删除级联。
 - `moderation_actions`：操作人、目标类型与 id、动作（approve / reject / remove / ban / unban）、理由、时间；作为审计日志的事实来源。
 
 索引：`(status, published_at desc)`、`author_id`、`slug`、搜索字段的 trigram GIN 索引、`post_tags(tag_id)`。
@@ -148,7 +150,7 @@ URL 使用短 slug（ASCII 标题自动生成，中文标题用 nanoid 兜底）
 - [免费邮件额度低] → 关闭邮箱确认，后续接 OAuth 或自定义 SMTP。
 - [RLS 策略写错导致越权] → 用 SQL 测试覆盖关键策略；管理员判断集中到 `is_admin()`。
 - [中文搜索质量一般] → `pg_trgm` 子串匹配；保留更换搜索引擎的路径。
-- [Waline 与主站共享数据库的连接压力] → 独立 schema、连接池；不稳定时切换存储或关闭评论。
+- [评论缺少敏感词过滤] → 登录后才能评论，管理员可删除；后续可接入过滤词表。
 - [发布后编辑不重新审核] → 管理员可下架；后续迭代加入“编辑即回待审”。
 - [Markdown XSS] → 服务端与客户端统一消毒，禁用原始 HTML。
 - [演示账号泄露] → 仅用于演示环境，README 明示，不用于生产。
