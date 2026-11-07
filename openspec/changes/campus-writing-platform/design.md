@@ -2,7 +2,7 @@
 
 ## Context
 
-全新空仓库，无既有代码或数据可兼容。这是一个练手 / 作品集项目，不是真实运营的社区；因此设计的首要目标是**完整、可演示、能讲清楚**，而不是高并发或合规规模。免费托管（Vercel + Supabase）是硬约束。内容以中文校园写作为主，这会影响搜索方案。审核流程是产品的核心叙事，状态机与权限必须在数据层真正落地，而不只是界面上的按钮。
+全新空仓库，无既有代码或数据可兼容。这是一个练手 / 作品集项目，不是真实运营的社区；因此设计的首要目标是**完整、可演示、能讲清楚**，而不是高并发或合规规模。免费托管（Vercel / Cloudflare Workers + Supabase）是硬约束。内容以中文校园写作为主，这会影响搜索方案。审核流程是产品的核心叙事，状态机与权限必须在数据层真正落地，而不只是界面上的按钮。
 
 ## Goals / Non-Goals
 
@@ -131,7 +131,8 @@ URL 使用短 slug（ASCII 标题自动生成，中文标题用 nanoid 兜底）
 ### D9: 部署、迁移与种子数据
 
 - Supabase 项目免费版；SQL 迁移纳入仓库 `supabase/migrations`，用 Supabase CLI 执行。
-- Vercel 连接 Git 仓库，按环境注入 `NEXT_PUBLIC_SUPABASE_URL`、`NEXT_PUBLIC_SUPABASE_ANON_KEY`、`SUPABASE_SERVICE_ROLE_KEY`（仅服务端）、`WALINE_URL`。
+- 主部署为 Vercel；同时保留 OpenNext Cloudflare Workers 配置（`open-next.config.ts`、`wrangler.jsonc`）作为备选部署。
+- 按环境注入 `NEXT_PUBLIC_SUPABASE_URL`、`NEXT_PUBLIC_SUPABASE_ANON_KEY`、`SUPABASE_SERVICE_ROLE_KEY`（仅服务端）。
 - 提供 seed 脚本：一名管理员、两名作者、若干已发布文章与标签、一篇待审文章，便于演示审核流。
 - 演示阶段关闭邮箱确认（免费 SMTP 限额低）；需要时再接入自定义 SMTP 或 OAuth。
 - 免费版 Supabase 闲置会休眠，首次访问较慢；用定时请求保活或接受这一表现。
@@ -146,7 +147,7 @@ URL 使用短 slug（ASCII 标题自动生成，中文标题用 nanoid 兜底）
 ## Risks / Trade-offs
 
 - [Supabase 免费版闲置休眠] → 定时保活，或在 README 说明首次访问较慢。
-- [Vercel 国内访问不稳定] → 绑定自定义域名；演示时本地运行；接受练手阶段的限制。
+- [Vercel / Cloudflare 域名在国内访问受限] → 保留双部署配置；演示时本地运行或使用代理；国内长期访问需要国内云 + 备案。
 - [免费邮件额度低] → 关闭邮箱确认，后续接 OAuth 或自定义 SMTP。
 - [RLS 策略写错导致越权] → 用 SQL 测试覆盖关键策略；管理员判断集中到 `is_admin()`。
 - [中文搜索质量一般] → `pg_trgm` 子串匹配；保留更换搜索引擎的路径。
@@ -160,8 +161,8 @@ URL 使用短 slug（ASCII 标题自动生成，中文标题用 nanoid 兜底）
 全新项目，无数据迁移。
 
 1. 创建 Supabase 项目，执行迁移并运行 seed。
-2. 在 Vercel 配置环境变量并连接仓库。
-3. 部署后按冒烟流程验证：注册 → 写作 → 提交 → 审核 → 公开阅读。
+2. 在 Vercel 配置环境变量并连接仓库；Cloudflare Workers 作为备选部署，通过 `npm run deploy` 发布。
+3. 部署后按冒烟流程验证：注册 → 写作 → 提交 → 审核 → 公开阅读 → 评论。
 4. 回滚：回退部署版本；数据库用迁移向前修复，项目初期不保留生产数据。
 
 ## Open Questions

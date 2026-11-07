@@ -24,7 +24,7 @@
 | 权限       | Postgres Row Level Security + 状态机触发器      |
 | Markdown   | react-markdown + remark-gfm + rehype-sanitize   |
 | 评论       | 内置 Supabase 评论表 + RLS                      |
-| 部署       | Vercel 免费版                                   |
+| 部署       | Vercel / Cloudflare Workers（双配置）            |
 | 测试       | Vitest + 集成验证脚本                           |
 
 ## 架构
@@ -161,10 +161,15 @@ npm run dev
 | `npm run verify:auth`              | 验证注册、资料更新、用户名唯一性、头像上传 |
 | `npm run verify:posts`             | 验证文章状态机、审核、下架、封禁与审计日志 |
 | `npm run verify:public`            | 验证首页 / 详情 / 作者 / 标签 / 搜索查询   |
+| `npm run verify:comments`          | 验证评论读写与删除权限                     |
+| `npm run preview`                  | 构建并本地预览 Cloudflare Worker           |
+| `npm run deploy`                   | 构建并部署到 Cloudflare Workers            |
 
 > 集成验证脚本会创建并清理临时用户与文章，需要 `.env.local` 中的 Supabase 配置。
 
-## 部署到 Vercel
+## 部署
+
+### Vercel
 
 1. 将仓库推送到 GitHub，在 Vercel 中导入项目。
 2. 在 Vercel 项目设置中配置环境变量：
@@ -173,6 +178,22 @@ npm run dev
    - `SUPABASE_SERVICE_ROLE_KEY`
 3. Build Command 保持 `npm run build`。
 4. 部署后访问生产 URL，使用演示账号或注册新账号验证完整流程。
+
+### Cloudflare Workers
+
+项目同时保留了 OpenNext Cloudflare 配置：
+
+```bash
+npx wrangler login
+npx wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+
+npm run preview   # 本地构建并用 Wrangler 预览
+npm run deploy    # 构建并部署到 Cloudflare Workers
+```
+
+`NEXT_PUBLIC_*` 在构建时从 `.env.local` 内联；服务端密钥通过 Wrangler secret 注入。
+
+> 网络提示：`vercel.app` 与 `workers.dev` 域名在中国大陆通常无法直接访问。免费境外托管无法同时满足“国内可访问”；需要国内访问时，应使用自定义域名/CDN、代理，或国内云 + ICP 备案。
 
 Supabase 免费版项目在长时间闲置后会休眠，首次访问可能需要等待唤醒；可以添加定时请求保活。
 
@@ -201,10 +222,13 @@ supabase/
   manual-migrations.sql   合并版，便于 SQL Editor 执行
 scripts/                  迁移、种子与集成验证脚本
 docs/                     数据库、审核文档与页面预览
+open-next.config.ts       OpenNext Cloudflare 配置
+wrangler.jsonc            Cloudflare Workers 配置
 ```
 
 ## 已知限制
 
+- `vercel.app` 与 `workers.dev` 域名在中国大陆通常无法直接访问；免费境外托管无法保证国内可访问。
 - 评论为纯文本，暂无敏感词过滤；依靠“登录后才能评论 + 作者/管理员删除”控制。
 - 已发布文章允许作者直接编辑，改动即时生效，不会重新送审；管理员仍可下架。
 - 站内搜索使用 `ILIKE` + `pg_trgm`，适合小规模数据；数据量增长后可替换为专用搜索引擎。

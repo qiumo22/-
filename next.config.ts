@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -17,3 +18,9 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+if (process.env.NODE_ENV === "development") {
+  import("@opennextjs/cloudflare").then((module) =>
+    module.initOpenNextCloudflareForDev(),
+  );
+}

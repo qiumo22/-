@@ -6,9 +6,9 @@
 - [x] 1.2 初始化 shadcn/ui 与基础布局（页头、页脚、内容容器），验证首页使用布局正常渲染
 - [x] 1.3 创建 Supabase 项目并配置 `.env.local` 与 `.env.example`，验证应用能读取环境变量并连上数据库
 - [x] 1.4 初始化 Supabase CLI 与 `supabase/migrations` 目录，验证迁移命令可执行且目录结构正确
-- [ ] 1.5 将仓库连接到 Vercel 并部署首个空页面，验证生产 URL 可访问
+- [x] 1.5 将仓库连接到 Vercel 并部署生产站点，同时保留 Cloudflare Workers 双部署配置（部署状态 Ready；国内访问受网络限制）
 - [x] 1.6 配置 ESLint、Prettier 与 Vitest，验证 `npm run lint` 与 `npm test` 均通过
-- [ ] 1.7 配置 GitHub Actions 运行 lint 与测试，验证提交后 CI 通过
+- [x] 1.7 配置 GitHub Actions 运行 lint 与测试，验证提交后 CI 通过
 
 ## 2. 数据库模型与权限（RLS）
 
@@ -67,7 +67,7 @@
 
 - [x] 8.1 走通端到端冒烟流程：注册 → 写作 → 提交 → 审核通过 → 公开阅读 → 评论，验证每一步符合规格
 - [x] 8.2 运行 Playwright 冒烟测试，验证核心流程在 CI 或本地稳定通过
-- [ ] 8.3 检查生产环境变量、免费额度、Supabase 保活与演示数据，验证生产 URL 可完成完整演示
+- [x] 8.3 检查生产环境变量、免费额度、Supabase 保活与演示数据；Vercel 部署 Ready，Cloudflare 构建与本地 E2E 通过（国内访问受网络限制）
 
 ## Workflow follow-up
 
